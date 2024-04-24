@@ -46,7 +46,7 @@ Qualifications from the Master Table can be re-used multiple times for multiple 
 
 ##### Create three learners
 
-##### The first learner is Dylan
+###### The first learner is Dylan
 ###### Dylan applied for Computer Science, and passed 101 and 102
 ###### Dylan applied for Accounting, and passed 101
 ###### The second learner is Dean
