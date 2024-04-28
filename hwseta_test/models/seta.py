@@ -157,8 +157,6 @@ class LearnerUnits(models.Model):
 			record.allowed_value_ids = self.env["hwseta.units"].search([('id', 'in', filtered_unit_ids)])
 
 
-
-
 	@api.one
 	@api.depends('master_unit')
 	def _get_credits(self):
