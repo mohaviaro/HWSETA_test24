@@ -1,3 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 hwseta.learners_global,hwseta.learners,model_hwseta_learners,,1,1,1,1
-
+hwseta_qualifications_global,hwseta_qualifications,model_hwseta_qualifications,,1,1,1,1
+hwseta_units_global,hwseta_units,model_hwseta_units,,1,1,1,1
+learner_units_global,learner_units,model_learner_units,,1,1,1,1
+learner_qualifications_global,learner_qualifications,model_learner_qualifications,,1,1,1,1

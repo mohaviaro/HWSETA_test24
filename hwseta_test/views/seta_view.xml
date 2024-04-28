@@ -3,17 +3,111 @@
   <data>
       <menuitem id="seta_root"
 name="HWSETA"/>
+
+
+<!--      Learner master table view-->
+
+      <record id="master_learners_tree" model="ir.ui.view">
+            <field name="name">hwseta.learners.tree</field>
+            <field name="model">hwseta.learners</field>
+            <field name="arch" type="xml">
+                <tree string="Learner Master" delete="0">
+                    <field name="name"/>
+                    <field name="id_number"/>
+                </tree>
+            </field>
+         </record>
+
+      <record id="master_learners_form" model="ir.ui.view">
+            <field name="name">hwseta.learners.form</field>
+            <field name="model">hwseta.learners</field>
+            <field name="arch" type="xml">
+                <form string="Learner" delete="0" duplicate="0">
+                    <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Name *" required="1"/>
+                        </group>
+                        <group>
+                            <field name="id_number" string="id Number *" required="1"/>
+                        </group>
+                        </group>
+
+                        <group string="Learner Qualifications">
+                        <field name="qualifications" string="Qualification" editable="bottom" >
+                                <tree string="Lines" delete="true" >
+                                    <field name="qualification" />
+									<field name="learner"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+
+
      <record id="action_list_learners" model="ir.actions.act_window">
          <field name="name">action.learners</field>
          <field name="type">ir.actions.act_window</field>
          <field name="res_model">hwseta.learners</field>
-         
          <field name="view_mode">tree,form</field>
       </record>
      <menuitem id='seta_learner_menuitem'
 name='Learners'
 parent="seta_root"
 action='action_list_learners' sequence="7"/>
+
+
+
+
+
+<!--      Qualification Master table view-->
+
+      <record id="master_hwseta_qualifications_tree" model="ir.ui.view">
+            <field name="name">hwseta.qualifications.tree</field>
+            <field name="model">hwseta.qualifications</field>
+            <field name="arch" type="xml">
+                <tree string="Qualifications Master" delete="0">
+                    <field name="name"/>
+                    <field name="minimum_credits"/>
+                    <field name="total_credit"/>
+                </tree>
+            </field>
+         </record>
+
+      <record id="master_hwseta_qualifications_form" model="ir.ui.view">
+            <field name="name">hwseta.qualifications.form</field>
+            <field name="model">hwseta.qualifications</field>
+            <field name="arch" type="xml">
+                <form string="Qualifications" delete="0" duplicate="0">
+                    <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Name *" required="1"/>
+                        </group>
+                        <group>
+                            <field name="minimum_credits" string="Minimum Credits *" required="1"/>
+                        </group>
+                        </group>
+
+                        <group string="Qualification Units">
+                        <field name="units" >
+                                <tree string="Lines" >
+                                    <field name="name" />
+									<field name="credit"/>
+                                </tree>
+
+                            </field>
+                    </group>
+                        <group>
+                            <field name="total_credit"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
      <record id="action_list_qualifications" model="ir.actions.act_window">
          <field name="name">action.qualifications</field>
          <field name="type">ir.actions.act_window</field>
@@ -25,37 +119,165 @@ action='action_list_learners' sequence="7"/>
 name='qualifications'
 parent="seta_root"
 action='action_list_qualifications' sequence="7"/>
+
+
+
+
+<!--Units master views-->
+
+      <record id="master_hwseta_units_tree" model="ir.ui.view">
+            <field name="name">hwseta.units.tree</field>
+            <field name="model">hwseta.units</field>
+            <field name="arch" type="xml">
+                <tree string="Units Master" delete="0">
+                    <field name="name" />
+                    <field name="credit"/>
+                </tree>
+            </field>
+         </record>
+
+      <record id="master_hwseta_units_form" model="ir.ui.view">
+            <field name="name">hwseta.units.form</field>
+            <field name="model">hwseta.units</field>
+            <field name="arch" type="xml">
+                <form string="Unit" delete="0" duplicate="0">
+                    <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Name *" required="1"/>
+                        </group>
+                        <group>
+                            <field name="credit" string="Credit" required="1"/>
+                        </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
      <record id="action_list_units" model="ir.actions.act_window">
          <field name="name">action.units</field>
          <field name="type">ir.actions.act_window</field>
          <field name="res_model">hwseta.units</field>
-         
          <field name="view_mode">tree,form</field>
       </record>
      <menuitem id='seta_unit_menuitem'
 name='units'
 parent="seta_root"
 action='action_list_units' sequence="7"/>
+
+
+
+<!--Learner unit view-->
+
+      <record id="master_learner_units_tree" model="ir.ui.view">
+            <field name="name">learner.units.tree</field>
+            <field name="model">learner.units</field>
+            <field name="arch" type="xml">
+                <tree string="Learner Units Master" delete="0" create="0">
+                    <field name="master_unit" />
+                    <field name="master_unit_credit"/>
+                    <field name="achieved"/>
+                </tree>
+            </field>
+         </record>
+
+      <record id="master_learner_units_form" model="ir.ui.view">
+            <field name="name">learner.units.form</field>
+            <field name="model">learner.units</field>
+            <field name="arch" type="xml">
+                <form string="Learner Unit" delete="0" duplicate="0">
+                    <sheet>
+                        <field name="allowed_value_ids" invisible="1"/>
+                    <group>
+                        <group>
+                             <field name="master_unit" force_save="1"/>
+                            <field name="master_unit_credit" readonly="1" force_save="1"/>
+                        </group>
+                        <group>
+                            <field name="achieved"/>
+                        </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+
    <record id="action_list_learner_units" model="ir.actions.act_window">
          <field name="name">action.units</field>
          <field name="type">ir.actions.act_window</field>
          <field name="res_model">learner.units</field>
-         
+
          <field name="view_mode">tree,form</field>
       </record>
      <menuitem id='seta_learner_unit_menuitem'
-name='units'
+name='learner units'
 parent="seta_root"
 action='action_list_learner_units' sequence="7"/>
+
+
+
+<!--learner Qualification view-->
+
+      <record id="master_learner_qualifications_tree" model="ir.ui.view">
+            <field name="name">learner.qualifications.tree</field>
+            <field name="model">learner.qualifications</field>
+            <field name="arch" type="xml">
+                <tree string="Learner Qualifications" delete="0">
+                    <field name="qualification"/>
+                    <field name="learner"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+         </record>
+
+      <record id="master_learner_qualifications_form" model="ir.ui.view">
+            <field name="name">learner.qualifications.form</field>
+            <field name="model">learner.qualifications</field>
+            <field name="arch" type="xml">
+                <form string="Learner Qualifications" delete="0" duplicate="0">
+                    <header>
+						<field name="status" widget="statusbar" options="{'clickable':False}"/>
+					</header>
+                    <sheet>
+                    <group>
+                        <group>
+                            <field name="qualification" required="1" string="Qualification *" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="achieved" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="learner" required="1" string="Learner *" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="min_credits" readonly="1"/>
+
+                        </group>
+                        </group>
+                        <group string="Learner Qualification Units">
+                        <field name="units"  >
+                                <tree string="Lines" delete="true" editable="bottom">
+                                    <field name="allowed_value_ids" invisible="1"/>
+                                    <field name="master_unit" required="1" string="Unit" options="{'no_create': True, 'no_create_edit':True}" />
+                                    <field name="master_unit_credit"/>
+									<field name="achieved"/>
+                                </tree>
+
+
+                            </field>
+                            <field name="achieved_credits" readonly="1"/>
+
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+
+
 <record id="action_list_learner_qualifications" model="ir.actions.act_window">
          <field name="name">action.qualifications</field>
          <field name="type">ir.actions.act_window</field>
          <field name="res_model">learner.qualifications</field>
-         
          <field name="view_mode">tree,form</field>
       </record>
      <menuitem id='seta_learner_qualification_menuitem'
-name='qualifications'
+name='Learner qualifications'
 parent="seta_root"
 action='action_list_learner_qualifications' sequence="7"/>
   </data>
